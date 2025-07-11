@@ -1,5 +1,5 @@
 # MicroOS
- A simple CLI based Operating System with a microkernel architecture and only basic essential functions
+ A CLI-based Microkernel Operating System
 
 ## To - D0
 - [ ] Set Up Bootloader in ASM(Basic Hello world kernal)
