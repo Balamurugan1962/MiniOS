@@ -1,7 +1,7 @@
 # MicroOS
  A CLI-based Microkernel Operating System
 
-## To - D0
+### To-Do:
 - [ ] Set Up Bootloader in ASM(Basic Hello world kernal)
 - [ ] Set Up Disk Access
 - [ ] Set Up a File System
