@@ -1,4 +1,4 @@
-# MicroOS
+# MiniOS
  A CLI-based Microkernel Operating System
 
 ### To-Do:
