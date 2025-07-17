@@ -177,7 +177,7 @@ will assign next 11 bytes of main memory to 'Hello World' respectively
 
 and keeping it in a lable like
 
-'''asm
+```asm
 lable:
   db "Hello World"
 ```
@@ -251,6 +251,7 @@ db 0xAA
 org [0x7c00]
 mov ah,0x0E
 mov bx,helloworld
+
 loop:
   mov al,[bx]
   cmp al,0
