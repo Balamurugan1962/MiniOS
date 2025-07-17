@@ -274,6 +274,24 @@ db 0x55
 db 0xAA
 ```
 
+
+now save the file, and compile it to binary formate
+
+```zsh
+nasm -f bin boot.asm -o boot.bin
+```
+
+now emulate a x86 64bit cpu with qemu
+
+```zsh
+qemu-system-x86_64 boot.bin
+```
+
+**Note:**
+- we can specify that its 16 bits by using `bits 16` directive(for backward compatability)
+
 Refernces:
 1) https://www.glamenv-septzen.net/en/view/6
 2) https://www.techtarget.com/whatis/definition/Master-Boot-Record-MBR
+3) https://wiki.osdev.org/BIOS
+4) https://wiki.osdev.org/Bootloader

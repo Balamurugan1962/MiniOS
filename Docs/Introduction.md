@@ -103,3 +103,4 @@ Reference:
 
 1) https://en.wikipedia.org/wiki/Master_boot_record
 2) https://en.wikipedia.org/wiki/Boot_sector
+3) https://wiki.osdev.org/Boot_Sequence
