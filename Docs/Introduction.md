@@ -26,7 +26,7 @@ BIOS is kept in ROM at location 0xFFF0
 - Initialize Devices (Prepares system devices like hard drives, display, USB ports)
 - Has Basic I/O and other Function Intrupts whcih is accessible in REAL MODE
 
-Since  CS = 0xF000 & IP = 0xFFF0, CPU points to 0xFFF0(CS * 16 + IP)
+Since  CS = 0xF0000 & IP = 0xFFFF0, CPU points to 0xFFFF0(CS * 16 + IP)
 Now CPU loads program(BIOS) from 0xFFF0
 
 #### BIOS runs POST:
@@ -56,9 +56,9 @@ MBR is of size 512 Bytes
 - It just loaded the first 512 bytes and jumped to it.
 
 #### Structure of MBR:
-- 0 - 446 : Boot loader Code
-- 447 - 510 : Partition
-- 511 - 512 : boot signature
+- 0 - 445 : Boot loader Code
+- 446 - 509 : Partition
+- 510 - 511 : boot signature
 
 ##### Boot loader Code:
 Boot loader is a software that loads the kernal into the main memory
@@ -71,7 +71,8 @@ this is a signature that signifies the end of the MBR
 Just like a string ends by '\0' the boot signature ends by 0xAA55 (2byte)
 
 ### Boot Loader is Loaded:
-intitially boot loader is of size 446Bytes so this is only used to load a Boot Manager from Disk
+intitially boot loader is of size 446Bytes so this is only used to load a Boot Manager
+But in legacy CPU, bootloader were small sized and loaded the first 512 bytes and jumped to it.
 
 #### Boot Manager
 A Boot Manager is a software program that is responsible for the management of the booting process of the computer. It is primarily responsible for selecting the Operating System to be loaded from multiple available options.
@@ -80,10 +81,10 @@ eg: GRUB
 
 then it loads the kernal of selected OS into memory
 
-### Kernal is loaded:
+### Kernel is loaded:
 It initializes the system, including memory management, process management, and device drivers.
 The kernel becomes the central component, managing all other software and hardware interactions.
-Now the system will be in KERNAL MODE
+Now the system will be in PROTECTED MODE
 
 then it tries to load the GUI by calling GUI Manager
 
@@ -93,3 +94,12 @@ then everything is Initialized without ansy errors Window Manager is called
 
 ### Lock Screen appiers:
 after calling window manger lock screen appiers
+
+
+**Note:** 0x is a convection used to specify that it is a HEXADECIMAL number
+
+
+Reference:
+
+1) https://en.wikipedia.org/wiki/Master_boot_record
+2) https://en.wikipedia.org/wiki/Boot_sector
