@@ -63,7 +63,7 @@ main:
 
   call func1
     popa
-    (-- some asm codes)
+    (-- some asm code --)
 
 func1:
   (-- some asm codes --)
@@ -89,7 +89,7 @@ there are three main segments in REAL mode, and for each segment we have a segme
 - 3) Stack Segment: `ss` contains stack
 - 4) Extra Segment: `es` for extra storage
 
-[Segmentation](Assets/Segmentation.png)
+[Segmentation](../../Assets/Segmentation.png)
 
 to access a memory for example a data we can do it by `ds * 16 + offset` offest is the line we are trying to access, ds is the data segement, this is also represented as ds:offset
 
