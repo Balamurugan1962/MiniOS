@@ -1,6 +1,14 @@
 [org 0x7c00]
-mov ah,0x0E
-mov bx,helloworld
+
+mov ah,0x02
+mov al,1
+mov ch,0
+mov cl,2
+mov dh,0
+mov bx,0x7E00
+int 0x13
+
+mov ah,0x0e
 
 loop:
 	mov al,[bx]
@@ -14,9 +22,7 @@ loop:
 exit:
 	jmp $
 
-helloworld: 
-	db "Hello World",0
-
 times 510 - ($ - $$) db 0
 db 0x55
 db 0xAA
+db "Hello World From Hard Disk",0
