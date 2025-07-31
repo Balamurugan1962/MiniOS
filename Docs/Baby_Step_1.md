@@ -3,6 +3,7 @@
 So in this step we will try to create the enviroment and try to print hellow world in bootloader.
 
 # Required Package:
+
 First we need to install a veritualiser, for MAC and Linux use [QEMU](https://www.qemu.org/docs/master/) and for Windows try to use WSL and then install QEMU
 
 We need to write our bootloader using assembly, for that we need to use a assember
@@ -22,6 +23,7 @@ create a folder for OS
 mkdir miniOS
 cd miniOS
 ```
+
 then create a `boot.asm` file
 
 ```zsh
@@ -32,6 +34,7 @@ code .
 now lets understand the concept of bootloader,
 
 ### 1) Boot loader is always loaded on `0x7c00` in Main Memory
+
 why is that, it all started from `IBM PC 5150` which used 8088 processor first loaded its bootloader in 0x7c00
 why did `IBM PC 5150` stored there? it was because that Computer used a memory layout like shown bellow
 
@@ -58,18 +61,21 @@ then after completing the bootloading OS will be loaded in memeory and will take
 and this type is continued still now to ensure backwards compatability
 
 ### 2) Our bootloader should be 512 Bytes long
+
 why we need so, as we so in introduction BIOS checks for MBR in DISK, to check for any bootabe device
 this MBR is typically 512 bytes long and why 512 byte, same story goes here `IBM PC 5150` was only capable of retriving 512 Bytes.
 
 So again for backwards compatability they continued this processes
 
 ### 3) our Bootloader code will act as a MBR:
+
 so as we saw the structure of MBR in intriduction
 first 446 bytes is only for bootloader, after that 64 bytes is for partition table imfromation then last two bytes for boot signature
 
 **Note:** As we are emulating with QEMU we are not going to access real hardware so we dont need to write partition information for now
 
 ### 4) Last two byte should be 0x55 and 0xaa
+
 again why 0x55AA as boot signature
 If the final signature is 0x55AA or 0xAA55 (Based on big endian or little endian repectively ) of MBR at 511th and 512th bytes respectively BIOS transfers control to the MBR to boot the OS. If the final signature does not match, the BIOS looks for additional bootable devices. If no devices are found, the OS does not boot, and the user receives an error message.
 
@@ -114,6 +120,7 @@ int 0x10
 ```
 
 so a simple 'Hello World' would take
+
 ```asm
 mov AH,0x0x0E
 mov AL,'H'
@@ -157,18 +164,23 @@ so here we can use a String and loops to reduse the lines
 first lets see how to assign a value to a variable
 
 in assembly we can assign as value by using `db` which can store 1 byte
+
 ```asm
 db 01
 ```
+
 then if db was in 1000th line in main memory after executing 1000th line will it will have have value of 01
 
 we can even store multiple values sequantially like
+
 ```asm
 db 'H','e','m','l','l','o'
 ```
+
 this will store H in 1000th then e in 1001th line and m in 1002th line and so on
 
 we can write above series of character as a string like shown below
+
 ```asm
 db 'Hello World'
 ```
@@ -181,7 +193,6 @@ and keeping it in a lable like
 lable:
   db "Hello World"
 ```
-
 
 we can use the value whenever we want just by moving the memory of label to register, label will have adress of 'H' ya first instruction in that place, like we jmp to a line in 8086
 
@@ -210,9 +221,9 @@ exit:
 helloworld:
   db "Hello World",
 ```
+
 cmp - subtracts both values and triggers respective flags
 je - compares zero flag if it is set then jumps
-
 
 then once we wrote all our code we should fill remaing bytes till 512th line to 0
 why to do so as i said 512Bytes will be loaded to main memory and it runs everything in that 512 to avoid junk values
@@ -243,8 +254,6 @@ db 0x55
 db 0xAA
 ```
 
-
-
 ## Finally our Hello world code is:
 
 ```asm
@@ -274,7 +283,6 @@ db 0x55
 db 0xAA
 ```
 
-
 now save the file, and compile it to binary formate
 
 ```zsh
@@ -288,10 +296,12 @@ qemu-system-x86_64 boot.bin
 ```
 
 **Note:**
+
 - we can specify that its 16 bits by using `bits 16` directive(for backward compatability)
 
 Refernces:
-1) https://www.glamenv-septzen.net/en/view/6
-2) https://www.techtarget.com/whatis/definition/Master-Boot-Record-MBR
-3) https://wiki.osdev.org/BIOS
-4) https://wiki.osdev.org/Bootloader
+
+1. https://www.glamenv-septzen.net/en/view/6
+2. https://www.techtarget.com/whatis/definition/Master-Boot-Record-MBR
+3. https://wiki.osdev.org/BIOS
+4. https://wiki.osdev.org/Bootloader
