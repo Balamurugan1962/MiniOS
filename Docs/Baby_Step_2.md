@@ -103,7 +103,7 @@ fun fact:
 - when we tried to mov bp, 0x8000 it was actually ss : 0x8000
 
 so this was all about intro segmentation, we see futhure about it later
-there are many diff memory models in which they use diff ways to handle this segment registers
+there are many diff memory models in which they use diff ways to handle this segment registers`
 
 for now we will try to work with tiny model in which ss=ds=cs=0
 that is the program's code, data, and stack are all contained within a single 64 KB segment.
